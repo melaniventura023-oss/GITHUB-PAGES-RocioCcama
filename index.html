@@ -1,320 +1,406 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ARTE MUNDO — Galería Universal</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
-
-  <!-- Estilos externos -->
-  <link rel="stylesheet" href="arte-mundo.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSEO DE LAS EMOCIONES — Arte & Psique</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Oswald:wght@300;400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- CANVAS — Fondo animado (controlado por arte-mundo.js) -->
-<canvas id="bgCanvas"></canvas>
+<!-- Fondo animado -->
+<canvas id="bg-canvas"></canvas>
+<div class="grain-overlay"></div>
 
-<!-- CURSOR PERSONALIZADO -->
-<div class="cursor" id="cursor"></div>
+<!-- Cursor personalizado -->
+<div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 <header>
-  <div class="logo">Arte<span>Mundo</span></div>
-  <nav>
-    <a    href="#categorias">Categorías</a>
-    <a href="#galeria">Galería</a>
-    <a href="#movimientos">Movimientos</a>
-    <a href="#artistas">Artistas</a>
-  </nav>
+  <div class="header-tape">— Exposición Permanente —</div>
+  <h1>MUSEO<span class="accent">DE LAS EMOCIONES</span></h1>
+  <p class="header-sub">Arte · Psicología · Experiencia Inmersiva</p>
 </header>
 
-<!-- ══ HERO ══ -->
-<section id="hero">
-  <div class="hero-floats">
-    <div class="float-img fi1">
-      <img src="https://images.unsplash.com/photo-1541367777708-7905fe3296c0?w=500&q=80" alt="Arte abstracto">
+<!-- NAV -->
+<nav>
+  <a href="#museo">I. Salas</a>
+  <a href="#generador">II. Generador</a>
+  <a href="#viaje">III. Mente</a>
+  <a href="#test">IV. Test</a>
+  <a href="#galeria">V. Galería</a>
+</nav>
+
+<!-- ════ SECCIÓN 1: MUSEO ════ -->
+<section id="museo">
+  <div class="reveal">
+    <div class="section-label">Sección 01</div>
+    <h2>SALAS<br>VIRTUALES</h2>
+  </div>
+
+  <div class="emotion-grid reveal">
+    <div class="emotion-card" data-emotion="alegria" data-name="ALEGRÍA"
+         style="--card-color:#f5c842;">
+      <canvas class="emotion-art" id="art-alegria"></canvas>
     </div>
-    <div class="float-img fi2">
-      <img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&q=80" alt="Pintura colorida">
+    <div class="emotion-card" data-emotion="ansiedad" data-name="ANSIEDAD"
+         style="--card-color:#9b4dca;">
+      <canvas class="emotion-art" id="art-ansiedad"></canvas>
     </div>
-    <div class="float-img fi3">
-      <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=350&q=80" alt="Arte clásico">
+    <div class="emotion-card" data-emotion="nostalgia" data-name="NOSTALGIA"
+         style="--card-color:#4a90d9;">
+      <canvas class="emotion-art" id="art-nostalgia"></canvas>
+    </div>
+    <div class="emotion-card" data-emotion="ira" data-name="IRA"
+         style="--card-color:#e63030;">
+      <canvas class="emotion-art" id="art-ira"></canvas>
+    </div>
+    <div class="emotion-card" data-emotion="calma" data-name="CALMA"
+         style="--card-color:#2dcca7;">
+      <canvas class="emotion-art" id="art-calma"></canvas>
     </div>
   </div>
 
-  <div class="hero-content">
-    <p class="hero-tag">Galería Universal de Arte</p>
-    <h1 class="hero-title">
-      El arte<br>
-      <span class="line-pink">nos hace</span>
-      <span class="line-yellow">humanos.</span>
-    </h1>
-    <p class="hero-sub">Desde las cuevas de Altamira hasta los píxeles del arte digital. Una exploración infinita de la creatividad humana a través del color, la forma y el tiempo.</p>
-    <div class="hero-buttons">
-      <a href="#galeria" class="btn-primary">Explorar galería</a>
-      <a href="#movimientos" class="btn-secondary">Ver movimientos</a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="btn-secondary">Instagram</a>
-      <a href="https://www.facebook.com/Historiadelahumanidad/posts/hombre-de-toquepala-periodo-precer%C3%A1mico-l%C3%ADtico-denominaciones-hombre-de-toquepal/444565861024706/" target="_blank" rel="noopener noreferrer" class="btn-secondary">Facebook</a>
-    </div>
+  <div style="text-align:center; margin-top:-20px;" class="reveal">
+    <p style="font-family:'Courier Prime',monospace;font-size:12px;letter-spacing:4px;color:var(--dust);text-transform:uppercase;">
+      — Haz clic en una emoción para entrar a su sala —
+    </p>
   </div>
-
-  <div class="scroll-hint">Desplázate ↓</div>
 </section>
 
-<!-- ══ MARQUEE ══ -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Pintura <span class="mdot">✦</span></span>
-    <span class="marquee-item">Escultura <span class="mdot">✦</span></span>
-    <span class="marquee-item">Fotografía <span class="mdot">✦</span></span>
-    <span class="marquee-item">Arte Digital <span class="mdot">✦</span></span>
-    <span class="marquee-item">Instalación <span class="mdot">✦</span></span>
-    <span class="marquee-item">Grabado <span class="mdot">✦</span></span>
-    <span class="marquee-item">Arte Urbano <span class="mdot">✦</span></span>
-    <span class="marquee-item">Performance <span class="mdot">✦</span></span>
-    <span class="marquee-item">Cerámica <span class="mdot">✦</span></span>
-    <span class="marquee-item">Cine <span class="mdot">✦</span></span>
-    <span class="marquee-item">Pintura <span class="mdot">✦</span></span>
-    <span class="marquee-item">Escultura <span class="mdot">✦</span></span>
-    <span class="marquee-item">Fotografía <span class="mdot">✦</span></span>
-    <span class="marquee-item">Arte Digital <span class="mdot">✦</span></span>
-    <span class="marquee-item">Instalación <span class="mdot">✦</span></span>
-    <span class="marquee-item">Grabado <span class="mdot">✦</span></span>
-    <span class="marquee-item">Arte Urbano <span class="mdot">✦</span></span>
-    <span class="marquee-item">Performance <span class="mdot">✦</span></span>
-    <span class="marquee-item">Cerámica <span class="mdot">✦</span></span>
-    <span class="marquee-item">Cine <span class="mdot">✦</span></span>
+<div class="divider"></div>
+
+<!-- SALA VIRTUAL (overlay) -->
+<div id="sala-virtual">
+  <div class="sala-inner">
+    <div class="sala-header">
+      <div>
+        <p style="font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:4px;opacity:0.5;text-transform:uppercase;margin-bottom:8px;">Sala Virtual</p>
+        <div class="sala-titulo" id="sala-titulo">ALEGRÍA</div>
+      </div>
+      <button class="btn-cerrar" onclick="cerrarSala()">✕ Salir</button>
+    </div>
+
+    <div class="sala-obras" id="sala-obras"></div>
+
+    <div id="sala-psico" style="padding:40px;background:rgba(0,0,0,0.4);border-left:4px solid white;max-width:700px;">
+      <p style="font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:0.5;margin-bottom:12px;">Análisis Psicológico</p>
+      <p id="psico-texto" style="font-size:15px;line-height:1.9;"></p>
+    </div>
   </div>
 </div>
 
-<!-- ══ 01 — CATEGORÍAS ══ -->
-<section id="categorias">
-  <div class="section-label reveal">// 01 — Disciplinas</div>
-  <h2 class="section-title reveal"><span class="gw">Formas</span> del Arte</h2>
+<!-- ════ SECCIÓN 2: GENERADOR ════ -->
+<section id="generador">
+  <div class="reveal">
+    <div class="section-label">Sección 02</div>
+    <h2>GENERADOR<br>DE ARTE EMOCIONAL</h2>
+  </div>
 
-  <div class="categories-grid reveal">
-    <div class="cat-card">
-      <div class="cat-color-bar"></div>
-      <img src="img/la noch estrellada.jpg" alt="La noche estrellada">
-      <div class="cat-info">
-        <span class="cat-badge">Pintura</span>
-        <h3 class="cat-name">El color como<br>lenguaje universal</h3>
-        <p class="cat-desc">Desde el Renacimiento hasta el expresionismo abstracto, la pintura ha sido el espejo del alma humana.</p>
+  <div class="generador-layout">
+    <div class="preguntas-wrapper reveal">
+
+      <div class="pregunta-item active" id="p1">
+        <div class="pregunta-num">01</div>
+        <div class="pregunta-texto">¿Cómo te sientes hoy?</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','eufórico')">Eufórico</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','tranquilo')">Tranquilo</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','melancólico')">Melancólico</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','ansioso')">Ansioso</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','enojado')">Enojado</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'estado','confuso')">Confuso</button>
+        </div>
       </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-color-bar"></div>
-      <img src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?w=500&q=80" alt="Escultura">
-      <div class="cat-info">
-        <span class="cat-badge">Escultura</span>
-        <h3 class="cat-name">La materia que cobra vida</h3>
-        <p class="cat-desc">Mármol, bronce, madera: la tridimensionalidad del arte que se puede rodear.</p>
+
+      <div class="pregunta-item" id="p2">
+        <div class="pregunta-num">02</div>
+        <div class="pregunta-texto">¿Qué nivel de energía tienes?</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'energia','explosiva')">Explosiva</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'energia','alta')">Alta</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'energia','media')">Media</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'energia','baja')">Baja</button>
+          <button class="opcion-btn" onclick="seleccionarOpcion(this,'energia','nula')">Agotado</button>
+        </div>
       </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-color-bar"></div>
-      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80" alt="Arquitectura">
-      <div class="cat-info">
-        <span class="cat-badge">Arquitectura</span>
-        <h3 class="cat-name">Arte que habitamos</h3>
-        <p class="cat-desc">El espacio construido como expresión cultural, social y estética de cada civilización.</p>
+
+      <div class="pregunta-item" id="p3">
+        <div class="pregunta-num">03</div>
+        <div class="pregunta-texto">¿Qué color te atrae ahora mismo?</div>
+        <div class="color-picker-row">
+          <div class="color-swatch" style="background:#e63030;" onclick="seleccionarColor(this,'rojo')"></div>
+          <div class="color-swatch" style="background:#f5a623;" onclick="seleccionarColor(this,'naranja')"></div>
+          <div class="color-swatch" style="background:#f5c842;" onclick="seleccionarColor(this,'amarillo')"></div>
+          <div class="color-swatch" style="background:#2ecc71;" onclick="seleccionarColor(this,'verde')"></div>
+          <div class="color-swatch" style="background:#4a90d9;" onclick="seleccionarColor(this,'azul')"></div>
+          <div class="color-swatch" style="background:#9b4dca;" onclick="seleccionarColor(this,'violeta')"></div>
+          <div class="color-swatch" style="background:#f0e8d0;" onclick="seleccionarColor(this,'blanco')"></div>
+          <div class="color-swatch" style="background:#2a2018;" onclick="seleccionarColor(this,'negro')"></div>
+        </div>
       </div>
+
+      <button class="btn-generar" onclick="generarArte()">GENERAR OBRA</button>
     </div>
-    <div class="cat-card">
-      <div class="cat-color-bar"></div>
-      <img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=900&q=80" alt="Arte Digital">
-      <div class="cat-info">
-        <span class="cat-badge">Arte Digital</span>
-        <h3 class="cat-name">El nuevo renacimiento</h3>
-        <p class="cat-desc">NFTs, generative art, IA creativa: la frontera digital redefine qué significa hacer arte.</p>
-      </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-color-bar"></div>
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80" alt="Fotografía">
-      <div class="cat-info">
-        <span class="cat-badge">Fotografía</span>
-        <h3 class="cat-name">Capturar lo eterno</h3>
-        <p class="cat-desc">Un instante congelado para siempre: la fotografía como testimonio y como poesía visual.</p>
+
+    <div id="arte-canvas-wrapper" class="reveal">
+      <canvas id="arte-canvas" width="500" height="500"></canvas>
+      <div class="arte-descripcion" id="arte-descripcion">
+        <span style="opacity:0.4;">// Responde las preguntas para generar tu obra única...</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CITA ══ -->
-<div class="quote-section">
-  <div class="quote-orbs">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-  </div>
-  <blockquote>
-    <span class="quote-mark">"</span>
-    <p>"El arte no reproduce lo visible;<br>más bien, <strong>lo hace visible</strong>."</p>
-    <cite>— Paul Klee, pintor y teórico del arte</cite>
-  </blockquote>
-</div>
+<div class="divider"></div>
 
-<!-- ══ 02 — GALERÍA ══ -->
-<section id="galeria">
-  <div class="section-header reveal">
-    <div class="section-label">// 02 — Galería</div>
-    <h2 class="section-title"><span class="gc">Obras</span> que inspiran</h2>
+<!-- ════ SECCIÓN 3: VIAJE ════ -->
+<section id="viaje">
+  <div class="reveal">
+    <div class="section-label">Sección 03</div>
+    <h2>VIAJE POR<br>LA MENTE HUMANA</h2>
   </div>
-  <div class="masonry reveal">
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=600&q=80" alt=""><div class="masonry-caption"><h4>Sin título #1</h4><span><span class="tag-dot"></span>Acrílico · 2023</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1580136608978-e8b9e22e9f00?w=600&q=80" alt=""><div class="masonry-caption"><h4>Fragmentos</h4><span><span class="tag-dot"></span>Collage digital · 2022</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1551913902-c92207136625?w=600&q=80" alt=""><div class="masonry-caption"><h4>Naturaleza Muerta</h4><span><span class="tag-dot"></span>Óleo · S.XVII</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1500479694472-551d1fb6258d?w=600&q=80" alt=""><div class="masonry-caption"><h4>Horizonte</h4><span><span class="tag-dot"></span>Fotografía · 2024</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1565436527561-b2bf18649d6d?w=600&q=80" alt=""><div class="masonry-caption"><h4>Espacio Vacío</h4><span><span class="tag-dot"></span>Instalación · 2021</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600&q=80" alt=""><div class="masonry-caption"><h4>Formas en Reposo</h4><span><span class="tag-dot"></span>Escultura · Mármol</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1562396826-1bcc3ee34df4?w=600&q=80" alt=""><div class="masonry-caption"><h4>Cromática</h4><span><span class="tag-dot"></span>Acrílico · 2023</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80" alt=""><div class="masonry-caption"><h4>Geometría Sagrada</h4><span><span class="tag-dot"></span>Arte Generativo · 2024</span></div></div>
-    <div class="masonry-item"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600&q=80" alt=""><div class="masonry-caption"><h4>Retrato Interior</h4><span><span class="tag-dot"></span>Óleo · 2020</span></div></div>
-  </div>
-</section>
 
-<div class="rainbow-bar"></div>
-
-<!-- ══ 03 — MOVIMIENTOS ══ -->
-<section id="movimientos">
-  <div class="section-label reveal">// 03 — Historia</div>
-  <h2 class="section-title reveal">Grandes <span class="gw">Movimientos</span></h2>
-  <div class="movements-grid reveal">
-    <div class="movement-item m1" data-num="01"><div class="movement-year">1400 — 1600</div><h3 class="movement-name">Renacimiento</h3><p class="movement-desc">El redescubrimiento clásico y el humanismo transformaron radicalmente el arte europeo.</p></div>
-    <div class="movement-item m2" data-num="02"><div class="movement-year">1860 — 1900</div><h3 class="movement-name">Impresionismo</h3><p class="movement-desc">Monet, Renoir y Degas rompieron con la academia para capturar la fugacidad de la luz.</p></div>
-    <div class="movement-item m3" data-num="03"><div class="movement-year">1907 — 1920</div><h3 class="movement-name">Cubismo</h3><p class="movement-desc">Picasso y Braque fragmentaron la realidad en múltiples perspectivas simultáneas.</p></div>
-    <div class="movement-item m4" data-num="04"><div class="movement-year">1916 — 1925</div><h3 class="movement-name">Dadaísmo</h3><p class="movement-desc">Una rebelión contra la lógica y el orden burgués que cuestionó los fundamentos del arte.</p></div>
-    <div class="movement-item m5" data-num="05"><div class="movement-year">1924 — 1950</div><h3 class="movement-name">Surrealismo</h3><p class="movement-desc">Dalí, Magritte y Ernst exploraron el inconsciente y los sueños como fuente de imágenes.</p></div>
-    <div class="movement-item m6" data-num="06"><div class="movement-year">1940 — 1960</div><h3 class="movement-name">Expresionismo Abstracto</h3><p class="movement-desc">Pollock y Rothko convirtieron el gesto y la emoción pura en el centro de la obra.</p></div>
-    <div class="movement-item m7" data-num="07"><div class="movement-year">1960 — 1970</div><h3 class="movement-name">Pop Art</h3><p class="movement-desc">Warhol y Lichtenstein elevaron la cultura popular y el consumismo a categoría de arte.</p></div>
-    <div class="movement-item m8" data-num="08"><div class="movement-year">1990 — hoy</div><h3 class="movement-name">Arte Contemporáneo</h3><p class="movement-desc">Sin límites ni definición: el arte actual explora tecnología, política, identidad y cuerpo.</p></div>
-  </div>
-</section>
-
-<!-- ══ 04 — ARTISTAS ══ -->
-<section id="artistas">
-  <div class="section-label reveal">// 04 — Maestros</div>
-  <h2 class="section-title reveal">Artistas que <span class="gc">cambiaron todo</span></h2>
-  <div class="artists-layout reveal">
-    <div class="artist-nav">
-      <div class="artist-tab active"  onclick="showArtist('frida',   this)">Frida Kahlo</div>
-      <div class="artist-tab"         onclick="showArtist('picasso',  this)">Pablo Picasso</div>
-      <div class="artist-tab"         onclick="showArtist('basquiat', this)">Jean-Michel Basquiat</div>
-      <div class="artist-tab"         onclick="showArtist('kusama',   this)">Yayoi Kusama</div>
+  <div class="mapa-mental reveal">
+    <div class="zona-card" style="--zona-color:#f5c842;" onclick="abrirZona('memoria')">
+      <div class="zona-numero">01</div>
+      <div class="zona-icon">🧠</div>
+      <div class="zona-nombre">MEMORIA</div>
+      <div class="zona-desc">Explorando cómo el cerebro construye, almacena y reconstruye el pasado. El espacio entre lo que fue y lo que recordamos.</div>
+      <div class="zona-tag">Explorar zona</div>
     </div>
-    <div>
-      <div class="artist-display active" id="a-frida">
-        <div class="artist-img"><img src="https://images.unsplash.com/photo-1580136608978-e8b9e22e9f00?w=400&q=80" alt="Frida Kahlo"></div>
-        <div class="artist-info">
-          <div class="artist-period">1907 — 1954 · México</div>
-          <h3 class="artist-name">Frida<br><em>Kahlo</em></h3>
-          <p class="artist-bio">Icono del arte latinoamericano, Kahlo transformó el dolor físico y emocional en obras de una intensidad simbólica sin igual. Sus autorretratos exploran la identidad, el género y el sufrimiento con honestidad brutal y colores vibrantes.</p>
-          <div class="artist-works">
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1562396826-1bcc3ee34df4?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=100&q=60" alt=""></div>
-          </div>
-        </div>
-      </div>
-      <div class="artist-display" id="a-picasso">
-        <div class="artist-img"><img src="https://images.unsplash.com/photo-1551913902-c92207136625?w=400&q=80" alt="Picasso"></div>
-        <div class="artist-info">
-          <div class="artist-period">1881 — 1973 · España</div>
-          <h3 class="artist-name">Pablo<br><em>Picasso</em></h3>
-          <p class="artist-bio">Co-fundador del cubismo y uno de los artistas más prolíficos del siglo XX. Picasso reinventó continuamente su lenguaje visual produciendo más de 20.000 obras en pintura, escultura, cerámica y grabado.</p>
-          <div class="artist-works">
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1565436527561-b2bf18649d6d?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=100&q=60" alt=""></div>
-          </div>
-        </div>
-      </div>
-      <div class="artist-display" id="a-basquiat">
-        <div class="artist-img"><img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=400&q=80" alt="Basquiat"></div>
-        <div class="artist-info">
-          <div class="artist-period">1960 — 1988 · EE.UU.</div>
-          <h3 class="artist-name">Jean-Michel<br><em>Basquiat</em></h3>
-          <p class="artist-bio">Surgido del grafiti neoyorquino, Basquiat fusionó texto, símbolo y pintura gestual para abordar el racismo, la identidad y el poder. Su obra explosiva lo convirtió en estrella antes de su muerte a los 27 años.</p>
-          <div class="artist-works">
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1500479694472-551d1fb6258d?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=100&q=60" alt=""></div>
-          </div>
-        </div>
-      </div>
-      <div class="artist-display" id="a-kusama">
-        <div class="artist-img"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80" alt="Kusama"></div>
-        <div class="artist-info">
-          <div class="artist-period">1929 — presente · Japón</div>
-          <h3 class="artist-name">Yayoi<br><em>Kusama</em></h3>
-          <p class="artist-bio">Con mundos de puntos infinitos y salas de espejos, Kusama convierte la obsesión en asombro. Pionera del arte de instalación desde los años 60, su obra borra los límites entre el yo y el universo.</p>
-          <div class="artist-works">
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=100&q=60" alt=""></div>
-            <div class="work-thumb"><img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=100&q=60" alt=""></div>
-          </div>
-        </div>
-      </div>
+
+    <div class="zona-card" style="--zona-color:#9b4dca;" onclick="abrirZona('suenos')">
+      <div class="zona-numero">02</div>
+      <div class="zona-icon">🌙</div>
+      <div class="zona-nombre">SUEÑOS</div>
+      <div class="zona-desc">El teatro nocturno de la mente. Imágenes, símbolos y narrativas que emergen cuando la consciencia se apaga.</div>
+      <div class="zona-tag">Explorar zona</div>
+    </div>
+
+    <div class="zona-card" style="--zona-color:#2ecc71;" onclick="abrirZona('creatividad')">
+      <div class="zona-numero">03</div>
+      <div class="zona-icon">✦</div>
+      <div class="zona-nombre">CREATIVIDAD</div>
+      <div class="zona-desc">El misterio de la creación. Cómo el cerebro conecta lo desconectado para producir lo que nunca existió antes.</div>
+      <div class="zona-tag">Explorar zona</div>
+    </div>
+
+    <div class="zona-card" style="--zona-color:#e63030;" onclick="abrirZona('inconsciente')">
+      <div class="zona-numero">04</div>
+      <div class="zona-icon">👁</div>
+      <div class="zona-nombre">INCONSCIENTE</div>
+      <div class="zona-desc">Las capas ocultas de la psique. Lo que sabemos sin saber que lo sabemos. Freud, Jung y el abismo interior.</div>
+      <div class="zona-tag">Explorar zona</div>
+    </div>
+
+    <div class="zona-card" style="--zona-color:#4a90d9;" onclick="abrirZona('percepcion')">
+      <div class="zona-numero">05</div>
+      <div class="zona-icon">◎</div>
+      <div class="zona-nombre">PERCEPCIÓN</div>
+      <div class="zona-desc">¿Vemos la realidad o construimos una? Ilusiones ópticas, sesgos cognitivos y la arquitectura de la experiencia.</div>
+      <div class="zona-tag">Explorar zona</div>
+    </div>
+
+    <div class="zona-card" style="--zona-color:#2dcca7;" onclick="abrirZona('empatia')">
+      <div class="zona-numero">06</div>
+      <div class="zona-icon">♡</div>
+      <div class="zona-nombre">EMPATÍA</div>
+      <div class="zona-desc">Neuronas espejo y la capacidad de sentir lo ajeno. La biología del amor, la compasión y la conexión humana.</div>
+      <div class="zona-tag">Explorar zona</div>
     </div>
   </div>
 </section>
 
-<!-- ══ ESTADÍSTICAS ══ -->
-<div class="stats-section">
-  <div class="stat-item reveal"><div class="stat-number">50K+</div><div class="stat-label">Obras catalogadas</div></div>
-  <div class="stat-item reveal"><div class="stat-number">180</div><div class="stat-label">Países representados</div></div>
-  <div class="stat-item reveal"><div class="stat-number">7</div><div class="stat-label">Milenios de historia</div></div>
-  <div class="stat-item reveal"><div class="stat-number">∞</div><div class="stat-label">Interpretaciones posibles</div></div>
-</div>
-
-<div class="rainbow-bar"></div>
-
-<!-- ══ NEWSLETTER ══ -->
-<div class="newsletter-section">
-  <div class="nl-orbs">
-    <div class="nl-orb nl-orb1"></div>
-    <div class="nl-orb nl-orb2"></div>
-  </div>
-  <h2 class="newsletter-title">Nunca dejes de mirar</h2>
-  <p class="newsletter-sub">Cada semana, una obra, un artista, una historia que cambia tu forma de ver el mundo.</p>
-  <div class="newsletter-form">
-    <input type="email" placeholder="tu@correo.com">
-    <button>Suscribirse</button>
+<!-- MODAL ZONA -->
+<div id="modal-zona">
+  <div class="modal-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:50px;">
+      <div>
+        <p class="modal-subtitle" id="modal-sub">Zona 01</p>
+        <div class="modal-title" id="modal-title">MEMORIA</div>
+      </div>
+      <button class="btn-cerrar" onclick="cerrarZona()">✕ Cerrar</button>
+    </div>
+    <div id="modal-experimentos"></div>
   </div>
 </div>
 
-<!-- ══ FOOTER ══ -->
+<div class="divider"></div>
+
+<!-- ════ SECCIÓN 4: TEST ════ -->
+<section id="test">
+  <div class="reveal">
+    <div class="section-label">Sección 04</div>
+    <h2>TEST PSICOLÓGICO<br>VISUAL</h2>
+  </div>
+
+  <div class="test-intro reveal">
+    <p>En lugar de preguntas tradicionales, selecciona imágenes, formas y composiciones visuales. Al final recibirás tu <strong>perfil creativo</strong>, tendencias emocionales y una interpretación psicológica única.</p>
+  </div>
+
+  <div class="test-progress reveal" id="test-progress">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+
+  <!-- Pasos del test -->
+  <div class="test-step active reveal" id="step-1">
+    <div class="test-pregunta">¿Qué composición te atrae más?</div>
+    <div class="imagenes-test" id="imagenes-1"></div>
+    <button class="btn-siguiente" onclick="siguientePaso(1)">CONTINUAR →</button>
+  </div>
+
+  <div class="test-step reveal" id="step-2">
+    <div class="test-pregunta">¿Qué paleta representa cómo te sientes?</div>
+    <div class="imagenes-test" id="imagenes-2"></div>
+    <button class="btn-siguiente" onclick="siguientePaso(2)">CONTINUAR →</button>
+  </div>
+
+  <div class="test-step reveal" id="step-3">
+    <div class="test-pregunta">¿Qué textura resuena contigo?</div>
+    <div class="imagenes-test" id="imagenes-3"></div>
+    <button class="btn-siguiente" onclick="siguientePaso(3)">CONTINUAR →</button>
+  </div>
+
+  <div class="test-step reveal" id="step-4">
+    <div class="test-pregunta">¿Qué movimiento expresa tu estado?</div>
+    <div class="imagenes-test" id="imagenes-4"></div>
+    <button class="btn-siguiente" onclick="mostrarResultado()">VER MI PERFIL →</button>
+  </div>
+
+  <!-- Resultado -->
+  <div id="resultado-test" class="reveal">
+    <div class="resultado-titulo" id="resultado-titulo">PERFIL: EXPLORADOR CAÓTICO</div>
+    <p id="resultado-desc" style="font-size:15px;line-height:1.9;max-width:700px;margin-bottom:30px;"></p>
+    <div class="resultado-perfil">
+      <div class="perfil-item">
+        <div class="perfil-icon">🎨</div>
+        <div class="perfil-label">Estilo Creativo</div>
+        <div class="perfil-valor" id="perfil-creativo">ABSTRACTO</div>
+      </div>
+      <div class="perfil-item">
+        <div class="perfil-icon">⚡</div>
+        <div class="perfil-label">Tendencia Emocional</div>
+        <div class="perfil-valor" id="perfil-emocional">INTENSA</div>
+      </div>
+      <div class="perfil-item">
+        <div class="perfil-icon">🧬</div>
+        <div class="perfil-label">Arquetipo</div>
+        <div class="perfil-valor" id="perfil-arquetipo">EL CREADOR</div>
+      </div>
+    </div>
+    <button class="btn-siguiente" style="margin-top:30px;" onclick="reiniciarTest()">REPETIR TEST</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════ SECCIÓN 2.5: TALLER DE DIBUJO ════ -->
+<section id="taller">
+  <div class="reveal">
+    <div class="section-label">Sección 02.5</div>
+    <h2>Taller de Dibujo</h2>
+  </div>
+
+  <div class="taller-layout">
+    <div class="taller-panel reveal">
+      <p class="taller-copy">Crea pequeñas obras directas en el lienzo. Elige color, textura, fondo y dibuja con el ratón o el dedo.</p>
+      <div class="taller-controls">
+        <div class="taller-control-group">
+          <span>Color</span>
+          <div class="taller-colors">
+            <button class="color-btn active" data-color="#f5c842" style="background:#f5c842;"></button>
+            <button class="color-btn" data-color="#9b4dca" style="background:#9b4dca;"></button>
+            <button class="color-btn" data-color="#4a90d9" style="background:#4a90d9;"></button>
+            <button class="color-btn" data-color="#2ecc71" style="background:#2ecc71;"></button>
+            <button class="color-btn" data-color="#ff5c8a" style="background:#ff5c8a;"></button>
+            <button class="color-btn" data-color="#f0f4f8" style="background:#f0f4f8;border:1px solid rgba(255,255,255,0.35);"></button>
+          </div>
+        </div>
+        <div class="taller-control-group">
+          <span>Textura</span>
+          <div class="taller-texturas">
+            <button class="texture-btn active" data-mode="line">Liso</button>
+            <button class="texture-btn" data-mode="spray">Spray</button>
+            <button class="texture-btn" data-mode="pastel">Pastel</button>
+            <button class="texture-btn" data-mode="grain">Grano</button>
+          </div>
+        </div>
+        <div class="taller-control-group">
+          <span>Fondo</span>
+          <div class="taller-texturas taller-bg-presets">
+            <button class="bg-btn active" data-bg="noche">Noche</button>
+            <button class="bg-btn" data-bg="amanecer">Amanecer</button>
+            <button class="bg-btn" data-bg="luna">Luna</button>
+            <button class="bg-btn" data-bg="tierra">Tierra</button>
+          </div>
+        </div>
+        <div class="taller-control-group">
+          <span>Opacidad</span>
+          <div class="opacity-wrapper">
+            <input id="opacity-range" type="range" min="0.2" max="1" step="0.05" value="0.9" />
+            <span id="opacity-value">90%</span>
+          </div>
+        </div>
+        <div class="taller-control-group">
+          <span>Grosor</span>
+          <div class="taller-tools">
+            <button class="tool-btn active" data-size="4">Fino</button>
+            <button class="tool-btn" data-size="8">Medio</button>
+            <button class="tool-btn" data-size="14">Grueso</button>
+          </div>
+        </div>
+        <div class="taller-actions">
+          <button class="btn-generar" id="clear-draw" type="button">Limpiar</button>
+          <button class="btn-generar" id="save-draw" type="button">Guardar</button>
+        </div>
+      </div>
+    </div>
+    <div class="taller-canvas-wrapper reveal">
+      <canvas id="draw-canvas" width="700" height="500"></canvas>
+      <div class="taller-hint">Arrastra aquí para crear tu obra.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════ GALERÍA ════ -->
+<div id="galeria">
+  <div class="section-label reveal" style="position:relative;z-index:5;">Galería Colectiva</div>
+  <h2 class="reveal" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,72px);letter-spacing:2px;margin-bottom:40px;position:relative;z-index:5;">OBRAS GENERADAS<br>POR USUARIOS</h2>
+  <div class="galeria-images reveal">
+    <figure class="galeria-img-card">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80" alt="Dibujo de paisaje montañoso al amanecer">
+      <figcaption>Montaña al amanecer</figcaption>
+    </figure>
+    <figure class="galeria-img-card">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Ilustración de playa serena al atardecer" />
+      <figcaption>Mar sereno</figcaption>
+    </figure>
+    <figure class="galeria-img-card">
+      <img src="https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?auto=format&fit=crop&w=900&q=80" alt="Dibujo de bosque otoñal con árboles altos" />
+      <figcaption>Bosque otoñal</figcaption>
+    </figure>
+    <figure class="galeria-img-card">
+      <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80" alt="Paisaje de colinas y cielo pastel" />
+      <figcaption>Colinas de ensueño</figcaption>
+    </figure>
+  </div>
+  <div class="galeria-grid reveal" id="galeria-grid"></div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <span class="logo-text">ArteMundo</span>
-      <p>Una ventana abierta a todas las formas de expresión artística que la humanidad ha creado a lo largo de su historia.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Explorar</h5>
-      <a href="#">Pintura</a><a href="#">Escultura</a><a href="#">Fotografía</a><a href="#">Arte Digital</a>
-    </div>
-    <div class="footer-col">
-      <h5>Historia</h5>
-      <a href="#">Arte Antiguo</a><a href="#">Arte Medieval</a><a href="#">Arte Moderno</a><a href="#">Arte Contemporáneo</a>
-    </div>
-    <div class="footer-col">
-      <h5>Comunidad</h5>
-      <a href="#">Artistas</a><a href="#">Exposiciones</a><a href="#">Talleres</a><a href="#">Blog</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 ArteMundo — Todos los derechos reservados</p>
-    <p>Hecho con ✦ para todos los amantes del arte</p>
-  </div>
+  <div class="footer-logo">MUSEO DE LAS EMOCIONES</div>
+  <p class="footer-copy">© 2025 — Arte · Psicología · Experiencia Inmersiva — Todos los derechos reservados</p>
 </footer>
 
-<!-- JavaScript externo — al final del body -->
-<script src="arte-mundo.js"></script>
-
+<script src="script.js" defer></script>
 </body>
 </html>
